@@ -13,10 +13,13 @@ const requestJop = fetch(
 const requestJoppe = fetch(
     "https://joppekoops.github.io/web-app-from-scratch-2324/data.json"
 ).then((response) => response.json());
+const requestEefje = fetch(
+    "https://eefjesnel.github.io/web-app-from-scratch-eefje/list.json"
+).then((response) => response.json());
 
-Promise.all([requestJop, requestJoppe])
-    .then(([data1, data2]) => {
-        allData.push(data1, data2);
+Promise.all([requestJop, requestJoppe, requestEefje])
+    .then(([data1, data2, data3]) => {
+        allData.push(data1, data2, data3);
     })
     .catch((error) => {
         console.error(error);
