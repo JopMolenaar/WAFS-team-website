@@ -1,6 +1,27 @@
-body {
-    margin: 0;
+:root {
+    --white-color: #FFFFFF;
+    --gray-color: #A9A9A9;
+    --dark-gray-color: #626262;
+    --black-color: #000000;
+
+    --eefje-visited-color: #BE54D9;
+    --eefje-bucketlist-color: #E1ADEE;
+    --jop-visited-color: #6CC050;
+    --jop-bucketlist-color: #C7EDBB;
+    --joppe-visited-color: #4EBAE8;
+    --joppe-bucketlist-color: #ACDEF3;
+    --lynn-visited-color: #FFA41B;
+    --lynn-bucketlist-color: #FFDAA3;
 }
 
-:root {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, button {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
 }

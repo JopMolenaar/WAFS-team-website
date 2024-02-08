@@ -1,0 +1,84 @@
+nav  {
+    width: calc(100vw - 4em);
+    height: 3.5em;
+
+    position: fixed;
+    z-index: 1000;
+
+    margin: 2em 2em 0 2em;
+}
+
+nav ul {
+    height: 100%;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li:nth-of-type(1) {
+    width: fit-content;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: .8em 1.5em;
+
+    background-color: var(--black-color);
+
+    border-radius: 1em;
+
+    cursor: pointer;
+}
+
+nav ul li:nth-of-type(1):hover {
+    background-color: var(--dark-gray-color);
+
+    transition: all .2s ease-in-out;
+}
+
+nav ul li:nth-of-type(1) a {
+    font-size: .75em;
+    color: var(--white-color);
+    text-decoration: none;
+}
+
+nav ul li:nth-of-type(2) {
+    width: fit-content;
+    height: 100%;
+
+    padding: .4em;
+
+    background-color: var(--gray-color);
+
+    border-radius: 1em;
+
+    cursor: pointer;
+}
+
+nav ul li:nth-of-type(2) button {
+    height: 100%;
+
+    padding: 0 1.5em;
+
+    background-color: var(--black-color);
+
+    border: none;
+    border-radius: 1em;
+
+    font-size: .75em;
+    color: var(--white-color);
+
+    cursor: pointer;
+}
+
+nav ul li:nth-of-type(2) button:hover {
+    background-color: var(--dark-gray-color);
+
+    transition: all .2s ease-in-out;
+}
