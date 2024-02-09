@@ -1,6 +1,6 @@
 nav  {
     width: calc(100vw - 4em);
-    height: 3.5em;
+    height: fit-content;
 
     position: fixed;
     z-index: 1000;
@@ -8,20 +8,20 @@ nav  {
     margin: 2em 2em 0 2em;
 }
 
-nav ul {
+nav > ul {
     height: 100%;
 
     display: flex;
     justify-content: space-between;
 }
 
-nav ul li {
+nav > ul > li {
     list-style: none;
 }
 
-nav ul li:nth-of-type(1) {
+nav > ul > li:nth-of-type(1) {
     width: fit-content;
-    height: 100%;
+    height: 3.5em;
 
     display: flex;
     justify-content: center;
@@ -36,33 +36,31 @@ nav ul li:nth-of-type(1) {
     cursor: pointer;
 }
 
-nav ul li:nth-of-type(1):hover {
+nav > ul > li:nth-of-type(1):hover {
     background-color: var(--dark-gray-color);
 
     transition: all .2s ease-in-out;
 }
 
-nav ul li:nth-of-type(1) a {
+nav > ul > li:nth-of-type(1) a {
     font-size: .75em;
     color: var(--white-color);
     text-decoration: none;
 }
 
-nav ul li:nth-of-type(2) {
+nav > ul > li:nth-of-type(2) {
     width: fit-content;
-    height: 100%;
+    height: fit-content;
 
     padding: .4em;
 
     background-color: var(--gray-color);
 
     border-radius: 1em;
-
-    cursor: pointer;
 }
 
-nav ul li:nth-of-type(2) button {
-    height: 100%;
+nav > ul > li:nth-of-type(2) > button {
+    height: 3.5em;
 
     padding: 0 1.5em;
 
@@ -77,8 +75,47 @@ nav ul li:nth-of-type(2) button {
     cursor: pointer;
 }
 
-nav ul li:nth-of-type(2) button:hover {
+nav > ul > li:nth-of-type(2) > button:hover {
     background-color: var(--dark-gray-color);
 
     transition: all .2s ease-in-out;
+}
+
+nav > ul > li:nth-of-type(2) > ul {
+    display: flex;
+    flex-direction: column;
+}
+
+nav > ul > li:nth-of-type(2) > ul li {
+    list-style: none;
+}
+
+nav > ul > li:nth-of-type(2) > ul li button {
+    width: 100%;
+    height: 3.5em;
+
+    margin-top: .5em;
+    padding: 0 1.5em;
+
+    background-color: var(--white-color);
+
+    border: none;
+    border-radius: 1em;
+
+    font-size: .75em;
+    color: var(--black-color);
+
+    cursor: pointer;
+}
+
+nav > ul > li:nth-of-type(2) > ul li button:hover {
+    background-color: var(--black-color);
+
+    color: var(--white-color);
+
+    transition: all .2s ease-in-out;
+}
+
+.dropdown-menu.animate-dropdown-menu {
+    display: none;
 }
