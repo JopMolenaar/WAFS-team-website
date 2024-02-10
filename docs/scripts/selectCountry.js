@@ -10,32 +10,24 @@ const svgCountries = document.querySelectorAll("main svg path");
 svgCountries.forEach((country) => {
     country.addEventListener("click", async () => {
         if(country.dataset.country){
-            console.log(await getCountryData(`${country.dataset.country}`));
-            // openSideMenuWithData(await getCountryData(`${country.dataset.country}`))
+            openSideMenuWithData(await getCountryData(`${country.dataset.country}`))
         }
     });
 });
 
+const popup = document.querySelector(".popup"); // The popup
+const closePopupButton = document.querySelector(".close-popup"); // The close button inside the popup
 
-// const openSideMenuWithData = (data) => {
-//     console.log(data);
-//     document.querySelector(".popup").classList.toggle("open")
-// }
+const openSideMenuWithData = (data) => {
+    popup.classList.add("open-popup"); // Open the popup
 
-// const closeSideMenuButton = document.querySelector(".popup button")
-// closeSideMenuButton.addEventListener("click", ()=>{
-//     document.querySelector(".popup").classList.toggel("open")
-// })
-
-const popup = document.querySelector(".popup");
-const showPopup = document.querySelector("main img");
-const closePopup = document.querySelector(".close-popup");
-
-showPopup.addEventListener("click", togglePopup);
-closePopup.addEventListener("click", togglePopup);
-
-function togglePopup() { 
-    let popup = document.querySelector(".popup");
-    popup.classList.toggle("open-popup");
+    console.log(data);
+    // TODO empty the article and place the data inside the article
 }
+
+// function to close the popup
+closePopupButton.addEventListener("click", ()=>{
+    popup.classList.remove("open-popup")
+})
+
 
