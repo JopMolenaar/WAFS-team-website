@@ -9,6 +9,10 @@ main  {
     align-items: center;
 }
 
-main img {
+main svg {
     width: 80%;
+}
+
+main svg path:hover {
+    fill: black;
 }
