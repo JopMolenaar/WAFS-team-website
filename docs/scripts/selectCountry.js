@@ -9,11 +9,19 @@
 const svgCountries = document.querySelectorAll("main svg path");
 svgCountries.forEach((country) => {
     country.addEventListener("click", async () => {
-        openSideMenuWithData(await getCountryData(`${country.dataset.country}`))
+        if(country.dataset.country){
+            openSideMenuWithData(await getCountryData(`${country.dataset.country}`))
+        }
     });
 });
 
 
-const openSideMenuWithData = (data) => {
-    console.log(data);
-}
+// const openSideMenuWithData = (data) => {
+//     console.log(data);
+//     document.querySelector(".popup").classList.toggle("open")
+// }
+
+// const closeSideMenuButton = document.querySelector(".popup button")
+// closeSideMenuButton.addEventListener("click", ()=>{
+//     document.querySelector(".popup").classList.toggel("open")
+// })
