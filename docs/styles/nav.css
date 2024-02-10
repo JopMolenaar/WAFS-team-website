@@ -27,7 +27,7 @@ nav > ul > li:nth-of-type(1) {
     justify-content: center;
     align-items: center;
 
-    padding: .8em 1.5em;
+    padding: 0 1.5em;
 
     background-color: var(--black-color);
 
@@ -62,39 +62,7 @@ nav > ul > li:nth-of-type(2) {
 nav > ul > li:nth-of-type(2) > button {
     height: 3.5em;
 
-    padding: 0 1.5em;
-
-    background-color: var(--black-color);
-
-    border: none;
-    border-radius: 1em;
-
-    font-size: .75em;
-    color: var(--white-color);
-
-    cursor: pointer;
-}
-
-nav > ul > li:nth-of-type(2) > button:hover {
-    background-color: var(--dark-gray-color);
-
-    transition: all .2s ease-in-out;
-}
-
-nav > ul > li:nth-of-type(2) > ul {
-    display: flex;
-    flex-direction: column;
-}
-
-nav > ul > li:nth-of-type(2) > ul li {
-    list-style: none;
-}
-
-nav > ul > li:nth-of-type(2) > ul li button {
-    width: 100%;
-    height: 3.5em;
-
-    margin-top: .5em;
+    margin-right: .2em;
     padding: 0 1.5em;
 
     background-color: var(--white-color);
@@ -108,14 +76,12 @@ nav > ul > li:nth-of-type(2) > ul li button {
     cursor: pointer;
 }
 
-nav > ul > li:nth-of-type(2) > ul li button:hover {
+nav > ul > li:nth-of-type(2) > button:last-of-type {
+    margin-right: 0;
+}
+
+.select-person.toggle-select-person {
     background-color: var(--black-color);
 
     color: var(--white-color);
-
-    transition: all .2s ease-in-out;
-}
-
-.dropdown-menu.animate-dropdown-menu {
-    display: none;
 }
