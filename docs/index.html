@@ -11,7 +11,8 @@
         <link rel="stylesheet" href="./styles/style.css"/>
         <link rel="stylesheet" href="./styles/nav.css"/>
         <link rel="stylesheet" href="./styles/main.css"/>
-        <link rel="stylesheet" href="./styles/legenda.css"/>
+        <link rel="stylesheet" href="./styles/worldmap.css"/>
+        <link rel="stylesheet" href="./styles/legend.css"/>
         <link rel="stylesheet" href="./styles/popup.css"/>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,22 +24,79 @@
         <nav>
             <ul>
                 <li>
-                    <a href="index.html">Logo</a>
+                    <a href="index.html">Naam Applicatie</a>
                 </li>
                 <li>
-                    <button>Voeg een persoon toe +</button>
+                    <button class="select-person">Eefje</button>
+                    <button class="select-person">Jop</button>
+                    <button class="select-person">Joppe</button>
+                    <button class="select-person">Lynn</button>
                 </li>
             </ul>
         </nav>
         
         <main>
             <img src="images/worldmap.svg" alt="worldmap">
-            <div class="legenda"></div>
-            <div class="popup"></div>
+            <ul>
+                <li class="legend-person">
+                    <h3>Legenda Eefje</h3>
+                    <div>
+                        <button></button>
+                        <p>Bezocht</p>
+                    </div>
+                    <div>
+                        <button></button>
+                        <p>Wil ik nog bezoeken</p>
+                    </div>
+                </li>
+                <li class="legend-person">
+                    <h3>Legenda Jop</h3>
+                    <div>
+                        <button></button>
+                        <p>Bezocht</p>
+                    </div>
+                    <div>
+                        <button></button>
+                        <p>Wil ik nog bezoeken</p>
+                    </div>
+                </li>
+                <li class="legend-person">
+                    <h3>Legenda Joppe</h3>
+                    <div>
+                        <button></button>
+                        <p>Bezocht</p>
+                    </div>
+                    <div>
+                        <button></button>
+                        <p>Wil ik nog bezoeken</p>
+                    </div>
+                </li>
+                <li class="legend-person">
+                    <h3>Legenda Lynn</h3>
+                    <div>
+                        <button></button>
+                        <p>Bezocht</p>
+                    </div>
+                    <div>
+                        <button></button>
+                        <p>Wil ik nog bezoeken</p>
+                    </div>
+                </li>
+            </ul>
+            <article class="popup">
+                <button class="close-popup">
+                    <img src="./images/close.svg" alt="close">
+                </button>
+                <h2>Italië</h2>
+                <p>Lorem ipsum dolor sit amet. Ut quia quia nam dolores quia ut aliquam assumenda ab facere nihil est blanditiis internos. Est assumenda laboriosam rem repudiandae nobis quo distinctio quia et exercitationem totam et accusantium sapiente eos optio commodi et minima eaque? Sed consectetur nisi in magni nulla sed consequatur nihil et saepe modi et suscipit architecto nam iste eligendi?</p>
+                <img src="./images/italy-banner.jpg" alt="italy-banner">
+            </article>
         </main>
 
         <script src="scripts/fetchDataSets.js"></script>
         <script src="scripts/script.js"></script>
+        <script src="scripts/selectPersons.js"></script>
+        <script src="scripts/selectCountry.js"></script>
     </body>
 
 </html>
