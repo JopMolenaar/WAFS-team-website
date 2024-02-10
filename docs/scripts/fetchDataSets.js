@@ -104,8 +104,5 @@ const getCountryData = async (country) => {
         .catch((error) => {
             console.error(error);
         });
-
-    console.log(countryData);
+    return countryData;
 };
-
-getCountryData('france');
