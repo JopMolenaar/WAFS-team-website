@@ -46,7 +46,7 @@ const openSideMenuWithData = (data) => {
 document.body.addEventListener("click", (event) => {
     const parent = event.target.parentElement; // Get the parent of the element that is clicked
     const secondParent = parent.parentElement; // Get the parent of the parent of the element that is clicked
-    if (event.target != popup && parent != popup && secondParent != popup || event.target === closePopupButton) {
+    if (event.target != popup && parent != popup && secondParent != popup || event.target === closePopupButton || parent === closePopupButton) {
         popup.classList.remove("open-popup");
     }
 });
