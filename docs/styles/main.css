@@ -8,11 +8,3 @@ main  {
     justify-content: center;
     align-items: center;
 }
-
-/* main svg {
-    width: 80%;
-} */
-
-main svg path:hover {
-    fill: black;
-}
