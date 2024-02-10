@@ -1,7 +1,15 @@
-const selectPerson = document.querySelectorAll(".select-person")
+const selectPerson = document.querySelectorAll(".select-person");
+let legendPerson = document.querySelectorAll(".legend-person");
 
-selectPerson.forEach(item => {
-    item.addEventListener("click", () => {
-        item.classList.toggle("toggle-select-person")
-    })
-})
+function animateSelectPerson() {
+    selectPerson.forEach((item, index) => {
+        item.addEventListener("click", () => {
+            item.classList.toggle("toggle-select-person");
+            legendPerson[index].classList.toggle("toggle-legend-person");
+        });
+    });
+}
+
+animateSelectPerson();
+
+
