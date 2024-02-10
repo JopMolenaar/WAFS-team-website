@@ -41,18 +41,24 @@ main article button img {
 }
 
 main article h2 {
+    margin-top: 1em;
+
     font-size: 2em;
     color: var(--white-color);
 }
 
 main article p {
+    margin-top: 1em;
+
     font-size: .75em;
     color: var(--gray-color);
     line-height: 140%;
 }
 
-main article img {
+main article > img {
     width: 100%;
+
+    margin-top: 1em;
 
     border-radius: 1em;
 }
