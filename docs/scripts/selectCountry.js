@@ -10,7 +10,8 @@ const svgCountries = document.querySelectorAll("main svg path");
 svgCountries.forEach((country) => {
     country.addEventListener("click", async () => {
         if(country.dataset.country){
-            openSideMenuWithData(await getCountryData(`${country.dataset.country}`))
+            console.log(await getCountryData(`${country.dataset.country}`));
+            // openSideMenuWithData(await getCountryData(`${country.dataset.country}`))
         }
     });
 });
