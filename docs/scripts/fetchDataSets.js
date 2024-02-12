@@ -11,7 +11,7 @@ const requestJop = fetch(
     "https://jopmolenaar.github.io/web-app-from-scratch-2324/reizen.json"
 ).then((response) => response.json());
 const requestJoppe = fetch(
-    "https://joppekoops.github.io/web-app-from-scratch-2324/data.json"
+    "https://wafs-dot-erudite-imprint-214919.ew.r.appspot.com/info.json"
 ).then((response) => response.json());
 const requestEefje = fetch(
     "https://eefjesnel.github.io/web-app-from-scratch-eefje/list.json"
