@@ -8,18 +8,21 @@
 let allData = [];
 
 const requestJop = fetch(
-    "https://jopmolenaar.github.io/web-app-from-scratch-2324/reizen.json"
+    "https://jopmolenaar.github.io/web-app-from-scratch-2324/info.json"
 ).then((response) => response.json());
 const requestJoppe = fetch(
     "https://wafs-dot-erudite-imprint-214919.ew.r.appspot.com/info.json"
 ).then((response) => response.json());
 const requestEefje = fetch(
-    "https://eefjesnel.github.io/web-app-from-scratch-eefje/list.json"
+    "https://eefjesnel.github.io/web-app-from-scratch-eefje/info.json"
+).then((response) => response.json());
+const requestLynn = fetch(
+    "https://lynnwolters.github.io/WAFS-individuele-website/info.json"
 ).then((response) => response.json());
 
-Promise.all([requestJop, requestJoppe, requestEefje])
-    .then(([data1, data2, data3]) => {
-        allData.push(data1, data2, data3);
+Promise.all([requestJop, requestJoppe, requestEefje, requestLynn])
+    .then(([data1, data2, data3, data4]) => {
+        allData.push(data1, data2, data3, data4);
     })
     .catch((error) => {
         console.error(error);
