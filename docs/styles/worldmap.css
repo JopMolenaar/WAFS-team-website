@@ -1,8 +1,22 @@
-main svg {
-    width: 80%;
+.map-container {
+    height: 100vh;
+    overflow: auto;
+    display: grid;
+    place-items: center;
 }
 
-main svg path:hover {
+.map-container svg {
+    width: 100%;
+    transform: scale(1);
+    transform-origin: top left;
+    height: auto;
+}
+
+.map-container :hover {
     fill: black;
     cursor: pointer;
+}
+
+.map-controls {
+    position: absolute;
 }
