@@ -1,15 +1,15 @@
 .map-container {
-    height: 100vh;
+    height: 100svh;
     overflow: auto;
     display: grid;
-    place-items: center;
+    align-items: center;
 }
 
 .map-container svg {
-    width: 100%;
+    width: auto;
+    height: 80%;
     transform: scale(1);
     transform-origin: top left;
-    height: auto;
 }
 
 .map-container :hover {
@@ -18,5 +18,24 @@
 }
 
 .map-controls {
-    position: absolute;
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    display: flex;
+    gap: .4em;
+    background-color: var(--gray-color);
+    padding: .4em;
+    border-radius: 1em;
+}
+
+.map-controls button {
+    aspect-ratio: 1 / 1;
+    height: 2em;
+    font-size: 1em;
+    display: grid;
+    place-items: center;
+    background-color: var(--white-color);
+    cursor: pointer;
+    border: none;
+    border-radius: .75em;
 }
