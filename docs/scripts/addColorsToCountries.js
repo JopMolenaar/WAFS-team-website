@@ -5,93 +5,12 @@
  * @Description:        add colors to the countries based on the active names we get. 
  */
 
-const defs = document.querySelector("main svg");
+const defs = document.querySelector("main svg defs");
 const paths = document.querySelectorAll(`path`);
-
-const addColorToCountries = (names) => {
-    paths.forEach((path) => {
-        path.setAttribute("fill", `var(--standard-path-color)`);
-    });
-    // TODO omdraaien.
-    allData.forEach((data) => {
-        if (names.length > 0) {
-            names.forEach((name) => {
-                const firstName = data.firstName.toLowerCase();
-                if (name === firstName) {
-                    console.log(names);
-                    // console.log(name);
-                    // console.log(name, data.bucketList, data.visitedCountries);
-                    const giveGradients = (list, kindOfColor) => {
-                        list.forEach((country) => {
-                            const paths = document.querySelectorAll(`[data-country="${country.country}"]`);
-                            paths.forEach((path) => {
-                                if (path.getAttribute("fill") != "var(--standard-path-color)" && !path.getAttribute("fill").includes("url")) { // if its not the default color and not a gradient => makes it here a gradient 
-                                    makeLinearGradient(defs, path, name, kindOfColor, country); // make the linear gradient 
-                                    path.setAttribute("fill", `url(#${country.country})`); // fill the path with the gradient
-                                } else if (path.getAttribute("fill") === "var(--standard-path-color)"){ // if the path is still on the default color.
-                                    path.setAttribute("fill", `var(--${name}-${kindOfColor}-color)`);
-                                } else { // if its already a gradient
-                                    const fillAttribute = path.getAttribute("fill");   
-                                    const countryName = fillAttribute.split("#")[1].replace(")", "");
-                                    let stripeColors = [];
-                                    const linearGradient = document.querySelector(`linearGradient#${countryName}`);
-                                    const allStops = linearGradient.querySelectorAll("stop");
-                                    allStops.forEach((stop)=>{
-                                        // push all existing colors of the gradient in the var stripeColors
-                                        if(!stripeColors.includes(stop.getAttribute("stop-color"))){
-                                            stripeColors.push(stop.getAttribute("stop-color"));
-                                        }
-                                    })
-                                    console.log(name);
-
-                                    // !!! this doesnt work !!!
-                                    stripeColors.push(`var(--${name}-${kindOfColor}-color)`); // push the color from the last clicked person
-                                    console.log(stripeColors);
-                                    linearGradient.innerHTML = ""; // empty the gradient
-                                    multipleColorGradients(linearGradient, stripeColors); // make the gradient again
-                                }
-                            });
-                        });
-                    }
-                    giveGradients(data.visitedCountries, "visited"); // fire all visited countries of the person in the active names array 
-                    giveGradients(data.bucketList, "bucketlist"); // fire all bucketlist countries of the person in the active names array
-                }
-            });
-        }
-    });
-};
-
-// Create the linear gradient html element
-const makeLinearGradient = (defs, path, name, kindOfColor, country) => {
-    // Create SVG elements
-    const linearGradient = document.createElementNS("http://www.w3.org/2000/svg","linearGradient");
-    const stop1 = document.createElementNS("http://www.w3.org/2000/svg","stop");
-    const stop2 = document.createElementNS("http://www.w3.org/2000/svg","stop");
-
-    // Set attributes for the linear gradient
-    linearGradient.setAttribute("id",`${country.country}`);
-    linearGradient.setAttribute("x1", "0%");
-    linearGradient.setAttribute("x2", "100%");
-    linearGradient.setAttribute("y1", "0%");
-    linearGradient.setAttribute("y2", "0%");
-
-    // Define stripe colors and offsets
-    const stripeColors = [`${path.getAttribute("fill")}`,`var(--${name}-${kindOfColor}-color)`];
-    const stripeOffsets = [
-        "0%",
-        "20%",
-        "40%",       
-        "60%",    
-        "80%",
-        "100%",
-    ];
-
-    multipleColorGradients(linearGradient, stripeColors, stripeOffsets);
-    defs.appendChild(linearGradient);
-}
 
 // add the gradient to the linearGradient html element
 const multipleColorGradients = (linearGradient, stripeColors) => {
+    console.log(stripeColors, linearGradient.getAttribute("id"));
     // Define stripe colors and offsets
     const stripeOffsets = [
         "0%",
@@ -106,6 +25,110 @@ const multipleColorGradients = (linearGradient, stripeColors) => {
         const stop = document.createElementNS("http://www.w3.org/2000/svg","stop");
         stop.setAttribute("offset", offset);
         stop.setAttribute("stop-color",stripeColors[index % stripeColors.length]); // Alternate colors
-        linearGradient.appendChild(stop);
+        linearGradient.append(stop);
     });
+    console.log(linearGradient, defs);
+    defs.append(linearGradient);
 }
+
+const makeGradients = (countryWithNames) => {
+    countryWithNames.forEach((country)=>{
+
+        const linearGradient = document.createElementNS("http://www.w3.org/2000/svg","linearGradient");
+        const stop1 = document.createElementNS("http://www.w3.org/2000/svg","stop");
+        const stop2 = document.createElementNS("http://www.w3.org/2000/svg","stop");
+
+        // Set attributes for the linear gradient
+        linearGradient.setAttribute("id",`${country.country}`);
+        linearGradient.setAttribute("x1", "0%");
+        linearGradient.setAttribute("x2", "100%");
+        linearGradient.setAttribute("y1", "0%");
+        linearGradient.setAttribute("y2", "0%");
+        console.log(country.country);
+        const path = document.querySelector(`path[data-country="${country.country}"]`);
+        console.log(path);
+        path.setAttribute("fill", `url(#${country.country})`);
+
+        let stripeColors = [];
+        country.persons.forEach((person)=>{
+            let name;
+            let kindOfColor;
+            if(person.includes("bucketlist")){
+                name = person.replace('bucketlist','').toLowerCase();
+                kindOfColor = "bucketlist";
+                // console.log("bucketlist", person, name);
+            } else {
+                name = person.replace('visited','').toLowerCase();
+                kindOfColor = "visited";
+                // console.log("visited", person, name);
+            }
+            stripeColors.push(`var(--${name}-${kindOfColor}-color)`)
+        })
+        console.log(country.country, stripeColors);
+        // console.log(stripeColors);
+        //  stripeColors = [`var(--${name}-${kindOfColor}-color)`,`var(--${name}-${kindOfColor}-color)`];
+        const stripeOffsets = [
+            "0%",
+            "20%",
+            "40%",       
+            "60%",    
+            "80%",
+            "100%",
+        ];
+
+        multipleColorGradients(linearGradient, stripeColors, stripeOffsets);
+    })
+}
+
+
+const addColorToCountries = (names) => {
+    let allCountries = []
+    defs.innerHTML = "";
+    paths.forEach((path) => {
+        path.setAttribute("fill", `var(--standard-path-color)`);
+        if(path.dataset.country){
+            allCountries.push(path.dataset.country);
+        }
+    });
+    console.log(allCountries);
+    let countryWithNames = []
+    console.log(names);
+    if (names.length > 0) {
+        names.forEach((name) => {
+            allData.forEach((data) => {
+                const firstName = data.firstName.toLowerCase();
+                if (name === firstName) {
+                    data.visitedCountries.forEach((visitedCountry) => {
+                        if(allCountries.includes(visitedCountry.country)){
+                            const existingCountry = countryWithNames.find(country => country.country === visitedCountry.country);
+                            if (existingCountry) {
+                                if (!existingCountry.persons.includes(`${data.firstName}visited`)) {
+                                    existingCountry.persons.push(`${data.firstName}visited`);
+                                }
+                            } else {
+                                countryWithNames.push({ country: visitedCountry.country, persons: [`${data.firstName}visited`] });
+                            }
+                        } else {
+                            console.log("missing country: ", visitedCountry.country);
+                        }
+                    });
+                    data.bucketList.forEach((bucketListCountry) => {
+                        if(allCountries.includes(bucketListCountry.country)){
+                            const existingCountry = countryWithNames.find(country => country.country === bucketListCountry.country);
+                            if (existingCountry) {
+                                if (!existingCountry.persons.includes(`${data.firstName}bucketlist`)) {
+                                    existingCountry.persons.push(`${data.firstName}bucketlist`);
+                                }
+                            } else {
+                                countryWithNames.push({ country: bucketListCountry.country, persons: [`${data.firstName}bucketlist`] });
+                            }
+                        } else {
+                            console.log("missing country: ", bucketListCountry.country);
+                        }
+                    });
+                }
+            });
+        });
+        makeGradients(countryWithNames);
+    }
+};
