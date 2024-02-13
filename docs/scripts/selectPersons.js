@@ -9,7 +9,7 @@ function animateSelectPerson() {
             item.classList.toggle("toggle-select-person");
             legendPerson[index].classList.toggle("toggle-legend-person");
             if(legendPerson[index].classList.contains("toggle-legend-person")){
-                activePersons.push(legendPerson[index].id)
+                activePersons.unshift(legendPerson[index].id)
             } else {
                 const personIndex = activePersons.indexOf(legendPerson[index].id);
                 activePersons.splice(personIndex, 1);
