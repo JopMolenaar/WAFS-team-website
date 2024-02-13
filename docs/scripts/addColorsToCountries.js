@@ -35,7 +35,6 @@ const makeGradients = (countryWithNames) => {
         const linearGradient = document.createElementNS("http://www.w3.org/2000/svg","linearGradient");
         const stop1 = document.createElementNS("http://www.w3.org/2000/svg","stop");
         const stop2 = document.createElementNS("http://www.w3.org/2000/svg","stop");
-
         // Set attributes for the linear gradient
         linearGradient.setAttribute("id",`${country.country}`);
         linearGradient.setAttribute("x1", "0%");
@@ -88,31 +87,33 @@ const addColorToCountries = (names) => {
                 const firstName = data.firstName.toLowerCase();
                 if (name === firstName) {
                     data.visitedCountries.forEach((visitedCountry) => {
-                        if(allCountries.includes(visitedCountry.country)){
-                            const existingCountry = countryWithNames.find(country => country.country === visitedCountry.country);
+                        const visitedCountryWithStripe = visitedCountry.country.replace(' ','-')
+                        if(allCountries.includes(visitedCountryWithStripe)){
+                            const existingCountry = countryWithNames.find(country => country.country === visitedCountryWithStripe);
                             if (existingCountry) {
                                 if (!existingCountry.persons.includes(`${data.firstName}visited`)) {
                                     existingCountry.persons.push(`${data.firstName}visited`);
                                 }
                             } else {
-                                countryWithNames.push({ country: visitedCountry.country, persons: [`${data.firstName}visited`] });
+                                countryWithNames.push({ country: visitedCountryWithStripe, persons: [`${data.firstName}visited`] });
                             }
                         } else {
-                            console.log("missing country: ", visitedCountry.country);
+                            console.log("missing country: ", visitedCountryWithStripe);
                         }
                     });
                     data.bucketList.forEach((bucketListCountry) => {
-                        if(allCountries.includes(bucketListCountry.country)){
-                            const existingCountry = countryWithNames.find(country => country.country === bucketListCountry.country);
+                        const bucketListCountryWithStripe = bucketListCountry.country.replace(' ','-')
+                        if(allCountries.includes(bucketListCountryWithStripe)){
+                            const existingCountry = countryWithNames.find(country => country.country === bucketListCountryWithStripe);
                             if (existingCountry) {
                                 if (!existingCountry.persons.includes(`${data.firstName}bucketlist`)) {
                                     existingCountry.persons.push(`${data.firstName}bucketlist`);
                                 }
                             } else {
-                                countryWithNames.push({ country: bucketListCountry.country, persons: [`${data.firstName}bucketlist`] });
+                                countryWithNames.push({ country: bucketListCountryWithStripe, persons: [`${data.firstName}bucketlist`] });
                             }
                         } else {
-                            console.log("missing country: ", bucketListCountry.country);
+                            console.log("missing country: ", bucketListCountryWithStripe);
                         }
                     });
                 }

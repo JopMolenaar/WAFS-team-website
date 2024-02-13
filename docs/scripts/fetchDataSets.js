@@ -16,13 +16,13 @@ const requestJoppe = fetch(
 const requestEefje = fetch(
     "https://eefjesnel.github.io/web-app-from-scratch-eefje/list.json"
 ).then((response) => response.json());
-// const requestLynn = fetch(
-//     "https://lynnwolters.github.io/WAFS-individuele-website/info.json"
-// ).then((response) => response.json());
+const requestLynn = fetch(
+    "https://lynnwolters.github.io/WAFS-individuele-website/info.json"
+).then((response) => response.json());
 
-Promise.all([requestJop, requestJoppe, requestEefje])
-    .then(([data1, data2, data3]) => {
-        allData.push(data1, data2, data3);
+Promise.all([requestJop, requestJoppe, requestEefje, requestLynn])
+    .then(([data1, data2, data3, data4]) => {
+        allData.push(data1, data2, data3, data4);
     })
     .catch((error) => {
         console.error(error);
