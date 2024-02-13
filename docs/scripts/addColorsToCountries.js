@@ -10,7 +10,6 @@ const paths = document.querySelectorAll(`path`);
 
 // add the gradient to the linearGradient html element
 const multipleColorGradients = (linearGradient, stripeColors) => {
-    console.log(stripeColors, linearGradient.getAttribute("id"));
     // Define stripe colors and offsets
     const stripeOffsets = [
         "0%",
