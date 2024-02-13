@@ -3,6 +3,7 @@
     --gray-color: #A9A9A9;
     --dark-gray-color: #626262;
     --black-color: #000000;
+    --standard-path-color: #ECECEC;
 
     --eefje-visited-color: #BE54D9;
     --eefje-bucketlist-color: #E1ADEE;
@@ -12,6 +13,9 @@
     --joppe-bucketlist-color: #ACDEF3;
     --lynn-visited-color: #FFA41B;
     --lynn-bucketlist-color: #FFDAA3;
+
+    --gradient-two-colors: linear-gradient(to left, #252525 0%, #252525 50%, #f5f5f5 50%, #f5f5f5 100%);
+    /* --gradient-two-colors: brown; */
 }
 
 * {

@@ -14,15 +14,15 @@ const requestJoppe = fetch(
     "https://wafs-dot-erudite-imprint-214919.ew.r.appspot.com/info.json"
 ).then((response) => response.json());
 const requestEefje = fetch(
-    "https://eefjesnel.github.io/web-app-from-scratch-eefje/info.json"
+    "https://eefjesnel.github.io/web-app-from-scratch-eefje/list.json"
 ).then((response) => response.json());
-const requestLynn = fetch(
-    "https://lynnwolters.github.io/WAFS-individuele-website/info.json"
-).then((response) => response.json());
+// const requestLynn = fetch(
+//     "https://lynnwolters.github.io/WAFS-individuele-website/info.json"
+// ).then((response) => response.json());
 
-Promise.all([requestJop, requestJoppe, requestEefje, requestLynn])
-    .then(([data1, data2, data3, data4]) => {
-        allData.push(data1, data2, data3, data4);
+Promise.all([requestJop, requestJoppe, requestEefje])
+    .then(([data1, data2, data3]) => {
+        allData.push(data1, data2, data3);
     })
     .catch((error) => {
         console.error(error);
