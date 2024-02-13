@@ -12,6 +12,7 @@ const addColorToCountries = (names) => {
     paths.forEach((path) => {
         path.setAttribute("fill", `var(--standard-path-color)`);
     });
+    // TODO omdraaien.
     allData.forEach((data) => {
         if (names.length > 0) {
             names.forEach((name) => {
@@ -41,10 +42,11 @@ const addColorToCountries = (names) => {
                                             stripeColors.push(stop.getAttribute("stop-color"));
                                         }
                                     })
+                                    console.log(name);
 
                                     // !!! this doesnt work !!!
                                     stripeColors.push(`var(--${name}-${kindOfColor}-color)`); // push the color from the last clicked person
-                            
+                                    console.log(stripeColors);
                                     linearGradient.innerHTML = ""; // empty the gradient
                                     multipleColorGradients(linearGradient, stripeColors); // make the gradient again
                                 }
