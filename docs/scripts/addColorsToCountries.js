@@ -27,7 +27,6 @@ const multipleColorGradients = (linearGradient, stripeColors) => {
         stop.setAttribute("stop-color",stripeColors[index % stripeColors.length]); // Alternate colors
         linearGradient.append(stop);
     });
-    console.log(linearGradient, defs);
     defs.append(linearGradient);
 }
 
@@ -44,9 +43,7 @@ const makeGradients = (countryWithNames) => {
         linearGradient.setAttribute("x2", "100%");
         linearGradient.setAttribute("y1", "0%");
         linearGradient.setAttribute("y2", "0%");
-        console.log(country.country);
         const path = document.querySelector(`path[data-country="${country.country}"]`);
-        console.log(path);
         path.setAttribute("fill", `url(#${country.country})`);
 
         let stripeColors = [];
@@ -56,17 +53,12 @@ const makeGradients = (countryWithNames) => {
             if(person.includes("bucketlist")){
                 name = person.replace('bucketlist','').toLowerCase();
                 kindOfColor = "bucketlist";
-                // console.log("bucketlist", person, name);
             } else {
                 name = person.replace('visited','').toLowerCase();
                 kindOfColor = "visited";
-                // console.log("visited", person, name);
             }
             stripeColors.push(`var(--${name}-${kindOfColor}-color)`)
         })
-        console.log(country.country, stripeColors);
-        // console.log(stripeColors);
-        //  stripeColors = [`var(--${name}-${kindOfColor}-color)`,`var(--${name}-${kindOfColor}-color)`];
         const stripeOffsets = [
             "0%",
             "20%",
@@ -90,9 +82,7 @@ const addColorToCountries = (names) => {
             allCountries.push(path.dataset.country);
         }
     });
-    console.log(allCountries);
     let countryWithNames = []
-    console.log(names);
     if (names.length > 0) {
         names.forEach((name) => {
             allData.forEach((data) => {
