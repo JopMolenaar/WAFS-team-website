@@ -18,6 +18,7 @@ main article {
     color: var(--white-color);
 
     transition: all .4s ease-in-out;
+    overflow: auto;
 }
 
 main article.open-popup {
@@ -61,4 +62,12 @@ main article > img {
     margin-top: 1em;
 
     border-radius: 1em;
+}
+
+main article ul {
+    position: static;
+}
+
+main article li {
+    display: block;
 }

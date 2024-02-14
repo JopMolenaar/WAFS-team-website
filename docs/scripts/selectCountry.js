@@ -32,12 +32,12 @@ const ratingToStars = (rating) => {
     for (let i = 0; i < 5; i++) {
         if (i < rating) { //add as many filled stars as the rating
         	let img = document.createElement("img");
-            img.src = '/images/star-solid.svg';
+            img.src = './images/star-solid.svg';
             img.alt = '';
             element.appendChild(img);
         } else { //complement with empty stars until there are five
         	let img = document.createElement("img");
-            img.src = '/images/star-regular.svg';
+            img.src = './images/star-regular.svg';
             img.alt = '';
             element.appendChild(img);
         }
