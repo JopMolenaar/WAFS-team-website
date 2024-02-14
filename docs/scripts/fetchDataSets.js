@@ -14,7 +14,7 @@ const requestJoppe = fetch(
     "https://wafs-dot-erudite-imprint-214919.ew.r.appspot.com/info.json"
 ).then((response) => response.json());
 const requestEefje = fetch(
-    "https://eefjesnel.github.io/web-app-from-scratch-eefje/info.json"
+    "https://eefjesnel.github.io/web-app-from-scratch-eefje/list.json"
 ).then((response) => response.json());
 const requestLynn = fetch(
     "https://lynnwolters.github.io/WAFS-individuele-website/info.json"
