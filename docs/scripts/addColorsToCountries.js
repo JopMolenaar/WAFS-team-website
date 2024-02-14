@@ -8,7 +8,97 @@
 const defs = document.querySelector("main svg defs");
 const paths = document.querySelectorAll(`path`);
 
-// add the gradient to the linearGradient html element
+/**
+ * This function gets an array with all the active names and loops over it. After that it loops over the countries out of the allData variable and when the 
+ * data matches with the name, it adds the country with that name to the countryWithNames array. 
+ * When a country already exists in the countryWithNames array, it just adds that name to that country next to the other name. 
+ * @param {Array} names - An array with all the active names
+ */
+const addColorToCountries = (names) => {
+    let allCountries = []; // get all countries that are in the svg
+    defs.innerHTML = ""; // remove all gradients
+    paths.forEach((path) => {
+        path.setAttribute("fill", `var(--standard-path-color)`);
+        if (path.dataset.country) {
+            allCountries.push(path.dataset.country);
+        }
+    });
+    let countryWithNames = []; // this is the array with an object per country and the matching names.
+    const processCountry = (countryType, data, prefix) => {
+        data[countryType].forEach((country) => {
+            const countryWithStripe = country.country.replace(' ', '-');
+            if (allCountries.includes(countryWithStripe)) { // if the country exists in the allCountries
+                const existingCountry = countryWithNames.find(item => item.country === countryWithStripe); // find the country in the countryWithNames
+                if (existingCountry) { // if the country already exists in the countryWithNames
+                    if (!existingCountry.persons.includes(`${data.firstName}${prefix}`)) { // if the name is not already in the matching persons array of that country.
+                        existingCountry.persons.push(`${data.firstName}${prefix}`);
+                    }
+                } else { // if the country does not exists in the countryWithNames, push the name in the persons array
+                    countryWithNames.push({ country: countryWithStripe, persons: [`${data.firstName}${prefix}`] });
+                }
+            } else {
+                console.log("missing country:", countryWithStripe); // log the missing countries
+            }
+        });
+    };
+
+    if (names.length > 0) { // when the name array is filled with at least one name
+        names.forEach((name) => {
+            allData.forEach((data) => {
+                const firstName = data.firstName.toLowerCase();
+                if (name === firstName) {
+                    processCountry('visitedCountries', data, 'visited');
+                    processCountry('bucketList', data, 'bucketlist');
+                }
+            });
+        });
+        makeGradients(countryWithNames);
+    }
+};
+
+
+/**
+ * This function creates a lineargradient element for every country in the given object. And finds out which colors should be in the gradient. 
+ * @param {Object} countryWithNames - Object with all the countries and the names that match with the countries 
+ */
+const makeGradients = (countryWithNames) => {
+    countryWithNames.forEach((country)=>{
+        const linearGradient = document.createElementNS("http://www.w3.org/2000/svg","linearGradient");
+        const stop1 = document.createElementNS("http://www.w3.org/2000/svg","stop");
+        const stop2 = document.createElementNS("http://www.w3.org/2000/svg","stop");
+        // Set attributes for the linear gradient
+        linearGradient.setAttribute("id",`${country.country}`);
+        linearGradient.setAttribute("x1", "0%");
+        linearGradient.setAttribute("x2", "100%");
+        linearGradient.setAttribute("y1", "0%");
+        linearGradient.setAttribute("y2", "0%");
+        const paths = document.querySelectorAll(`path[data-country="${country.country}"]`);
+        paths.forEach((path)=>{
+            path.setAttribute("fill", `url(#${country.country})`);
+        })
+        let stripeColors = [];
+        country.persons.forEach((person)=>{
+            let name;
+            let kindOfColor;
+            if(person.includes("bucketlist")){
+                name = person.replace('bucketlist','').toLowerCase();
+                kindOfColor = "bucketlist";
+            } else {
+                name = person.replace('visited','').toLowerCase();
+                kindOfColor = "visited";
+            }
+            stripeColors.push(`var(--${name}-${kindOfColor}-color)`)
+        })
+        multipleColorGradients(linearGradient, stripeColors);
+    })
+}
+
+
+/**
+ * Adds the gradient to the linearGradient html element and appends it to the defs element
+ * @param {Element} linearGradient - The linear gradient element
+ * @param {Array} stripeColors - Array with all the colors that should be in the gradient
+ */
 const multipleColorGradients = (linearGradient, stripeColors) => {
     // Define stripe colors and offsets
     const stripeOffsets = [
@@ -28,97 +118,3 @@ const multipleColorGradients = (linearGradient, stripeColors) => {
     });
     defs.append(linearGradient);
 }
-
-const makeGradients = (countryWithNames) => {
-    countryWithNames.forEach((country)=>{
-
-        const linearGradient = document.createElementNS("http://www.w3.org/2000/svg","linearGradient");
-        const stop1 = document.createElementNS("http://www.w3.org/2000/svg","stop");
-        const stop2 = document.createElementNS("http://www.w3.org/2000/svg","stop");
-        // Set attributes for the linear gradient
-        linearGradient.setAttribute("id",`${country.country}`);
-        linearGradient.setAttribute("x1", "0%");
-        linearGradient.setAttribute("x2", "100%");
-        linearGradient.setAttribute("y1", "0%");
-        linearGradient.setAttribute("y2", "0%");
-        const path = document.querySelector(`path[data-country="${country.country}"]`);
-        path.setAttribute("fill", `url(#${country.country})`);
-
-        let stripeColors = [];
-        country.persons.forEach((person)=>{
-            let name;
-            let kindOfColor;
-            if(person.includes("bucketlist")){
-                name = person.replace('bucketlist','').toLowerCase();
-                kindOfColor = "bucketlist";
-            } else {
-                name = person.replace('visited','').toLowerCase();
-                kindOfColor = "visited";
-            }
-            stripeColors.push(`var(--${name}-${kindOfColor}-color)`)
-        })
-        const stripeOffsets = [
-            "0%",
-            "20%",
-            "40%",       
-            "60%",    
-            "80%",
-            "100%",
-        ];
-
-        multipleColorGradients(linearGradient, stripeColors, stripeOffsets);
-    })
-}
-
-
-const addColorToCountries = (names) => {
-    let allCountries = []
-    defs.innerHTML = "";
-    paths.forEach((path) => {
-        path.setAttribute("fill", `var(--standard-path-color)`);
-        if(path.dataset.country){
-            allCountries.push(path.dataset.country);
-        }
-    });
-    let countryWithNames = []
-    if (names.length > 0) {
-        names.forEach((name) => {
-            allData.forEach((data) => {
-                const firstName = data.firstName.toLowerCase();
-                if (name === firstName) {
-                    data.visitedCountries.forEach((visitedCountry) => {
-                        const visitedCountryWithStripe = visitedCountry.country.replace(' ','-')
-                        if(allCountries.includes(visitedCountryWithStripe)){
-                            const existingCountry = countryWithNames.find(country => country.country === visitedCountryWithStripe);
-                            if (existingCountry) {
-                                if (!existingCountry.persons.includes(`${data.firstName}visited`)) {
-                                    existingCountry.persons.push(`${data.firstName}visited`);
-                                }
-                            } else {
-                                countryWithNames.push({ country: visitedCountryWithStripe, persons: [`${data.firstName}visited`] });
-                            }
-                        } else {
-                            console.log("missing country: ", visitedCountryWithStripe);
-                        }
-                    });
-                    data.bucketList.forEach((bucketListCountry) => {
-                        const bucketListCountryWithStripe = bucketListCountry.country.replace(' ','-')
-                        if(allCountries.includes(bucketListCountryWithStripe)){
-                            const existingCountry = countryWithNames.find(country => country.country === bucketListCountryWithStripe);
-                            if (existingCountry) {
-                                if (!existingCountry.persons.includes(`${data.firstName}bucketlist`)) {
-                                    existingCountry.persons.push(`${data.firstName}bucketlist`);
-                                }
-                            } else {
-                                countryWithNames.push({ country: bucketListCountryWithStripe, persons: [`${data.firstName}bucketlist`] });
-                            }
-                        } else {
-                            console.log("missing country: ", bucketListCountryWithStripe);
-                        }
-                    });
-                }
-            });
-        });
-        makeGradients(countryWithNames);
-    }
-};
