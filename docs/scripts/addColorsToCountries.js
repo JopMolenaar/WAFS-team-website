@@ -104,17 +104,39 @@ const multipleColorGradients = (linearGradient, stripeColors) => {
     const stripeOffsets = [
         "0%",
         "20%",
-        "40%",       
+        "20%",
+        "40%",   
+        "40%",      
         "60%",    
+        "60%",   
+        "80%",
         "80%",
         "100%",
     ];
     // Create and append stops for each stripe
-    stripeOffsets.forEach((offset, index) => {
-        const stop = document.createElementNS("http://www.w3.org/2000/svg","stop");
-        stop.setAttribute("offset", offset);
-        stop.setAttribute("stop-color",stripeColors[index % stripeColors.length]); // Alternate colors
-        linearGradient.append(stop);
-    });
+    for (let i = 0; i < stripeOffsets.length; i += 2) {
+        const stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+        stop1.setAttribute("offset", stripeOffsets[i]);
+        stop1.setAttribute("stop-color", stripeColors[(i / 2) % stripeColors.length]);
+        linearGradient.append(stop1);
+    
+        if (i + 1 < stripeOffsets.length) {
+            const stop2 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+            stop2.setAttribute("offset", stripeOffsets[i + 1]);
+            stop2.setAttribute("stop-color", stripeColors[(i / 2) % stripeColors.length]);
+            linearGradient.append(stop2);
+        }
+    }
     defs.append(linearGradient);
 }
+
+// source chatGPT:
+// prompt:
+// try to have the same color out of the stripeColors to have the place 1 and 2, and a different color 3 and 4. And so on
+// stripeOffsets.forEach((offset, index) => {
+//     const stop = document.createElementNS("http://www.w3.org/2000/svg","stop");
+//     stop.setAttribute("offset", offset);
+//     stop.setAttribute("stop-color",stripeColors[index % stripeColors.length]); // Alternate colors
+//     linearGradient.append(stop);
+// });
+// defs.append(linearGradient);
